@@ -1,12 +1,62 @@
 #!/bin/bash
+# dev.sh
 
-sh build.sh
+function usage() {
+echo "
+  To develop:
+  ./dev.sh
 
-# Jade
-jade_input='./*.jade'
-jade_output='./'
-jade --watch --pretty --out $jade_output $jade_input > /dev/null &
+  To run a server:
+  ./dev.sh --server
+
+  To develop with livereload:
+  ./dev.sh --livereload
+"
+}
+
+# Empty arguments
+if [[ -z "$1" ]]; then
+  usage;
+  exit 1;
+fi
+
+# Parse arguments
+while [[ $# > 0 ]]; do
+  key="$1"
+
+  case $key in
+    -S|--server)
+      __server=true
+      ;;
+
+    -l|--livereload)
+      __livereload=true
+      ;;
+
+    -h|--help)
+      usage;
+      exit 1;
+      ;;
+
+    *)
+      usage;
+      echo "  [error] unknown option:" $key;
+      exit 1;
+      ;;
+  esac
+
+  shift;
+done
+
+# Livereload
+if [[ $__livereload ]]; then
+  echo "  run livereload"
+  livereload . > /dev/null
+fi
 
 # Server
-server_port=8084
-http-server -p $server_port
+if [[ $__server ]]; then
+  server_port=8083;
+  echo "  run server at port ${server_port}"
+  http-server -p $server_port > /dev/null;
+fi
