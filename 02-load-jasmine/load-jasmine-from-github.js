@@ -20,12 +20,12 @@
         document.head.appendChild(scriptElement);
     }
 
-    insertCSS('../jasmine/lib/jasmine-1.3.0/jasmine.css');
+    insertCSS('http://shallker.github.io/learn-jasmine/jasmine/lib/jasmine-1.3.0/jasmine.css');
 
     // createElement('script')加document.head.appendChild 没有 document.write 好用
     // 前者好像是异步的，总是在 jasmine.js 还没有加载完之前就执行 jasmine-html.js
     // 后者是像是同步按顺序的执行js文件
-    document.write('<script type="text/javascript" src="../jasmine/lib/jasmine-1.3.0/jasmine.js"></script>')
-    document.write('<script type="text/javascript" src="../jasmine/lib/jasmine-1.3.0/jasmine-html.js"></script>')
-    document.write('<script type="text/javascript" src="./jasmine.execute().js"></script>')
+    document.write('<script type="text/javascript" src="http://shallker.github.io/learn-jasmine/jasmine/lib/jasmine-1.3.0/jasmine.js"></script>')
+    document.write('<script type="text/javascript" src="http://shallker.github.io/learn-jasmine/jasmine/lib/jasmine-1.3.0/jasmine-html.js"></script>')
+    document.write('<script type="text/javascript" src="http://shallker.github.io/learn-jasmine/02-load-jasmine/jasmine.execute().js"></script>')
 })();
